@@ -2,6 +2,7 @@ import os
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
+
 class GifWidget(QWidget):
     def __init__(self, gif_path):
         super().__init__()
@@ -16,14 +17,17 @@ class GifWidget(QWidget):
         self.setAutoFillBackground(False)
         self.setAttribute(Qt.WA_TranslucentBackground, True)
         self.repaint()
+
         layout = QVBoxLayout()
         self.label = QLabel()
         layout.addWidget(self.label)
         self.setLayout(layout)
+
         self.movie = QMovie(gif_path)
         self.movie.setSpeed(400)
         self.label.setMovie(self.movie)
         self.movie.start()
+
         iconpath = os.path.join('../Elaina.jpg')
         quit_action = QAction('退出', self, triggered=self.quit)
         quit_action.setIcon(QIcon(iconpath))
@@ -33,6 +37,9 @@ class GifWidget(QWidget):
         self.tray_icon.setIcon(QIcon(iconpath))
         self.tray_icon.setContextMenu(self.tray_icon_menu)
         self.tray_icon.show()
+
+        # 设置窗口大小为60x60
+        self.setGeometry(100, 100, 60, 60)
 
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
