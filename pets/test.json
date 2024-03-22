@@ -1,0 +1,10 @@
+{
+  "name" : "测试猫猫",
+  "type" : "gif",
+  "path" : "gifs/test.gif",
+  "icon" : "gifs/test.gif",
+  "speed" : 100,
+  "size" : {
+    "x" : 195, "y": 118
+  }
+}

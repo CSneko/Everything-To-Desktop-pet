@@ -1,0 +1,10 @@
+{
+  "name" : "黄豆粉",
+  "type" : "gif",
+  "path" : "gifs/kinako.gif",
+  "icon" : "gifs/kinako.gif",
+  "speed" : 100,
+  "size" : {
+    "x" : 166, "y": 131
+  }
+}
