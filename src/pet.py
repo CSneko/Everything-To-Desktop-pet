@@ -1,4 +1,7 @@
+import json
 import os
+import sys
+
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
@@ -18,6 +21,8 @@ class GifWidget(QWidget):
         size_x = data['size']['x']
         size_y = data['size']['y']
         speed = data['speed']
+        icon = data['icon']
+
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.SubWindow)
         self.setAutoFillBackground(False)
         self.setAttribute(Qt.WA_TranslucentBackground, True)
@@ -34,7 +39,7 @@ class GifWidget(QWidget):
         self.label.setMovie(self.movie)
         self.movie.start()
 
-        iconpath = os.path.join('../Elaina.jpg')
+        iconpath = os.path.join(icon)
         quit_action = QAction('退出', self, triggered=self.quit)
         quit_action.setIcon(QIcon(iconpath))
         self.tray_icon_menu = QMenu(self)
@@ -65,3 +70,19 @@ class GifWidget(QWidget):
     def mouseReleaseEvent(self, event):
         self.is_follow_mouse = False
         self.setCursor(QCursor(Qt.ArrowCursor))
+
+
+if __name__ == '__main__':
+    # 获取传入的路径
+    path = sys.argv[1]
+
+    with open(path, 'r') as file:
+        data = json.load(file)
+    pet_type = data['type']
+    app = QApplication(sys.argv)
+    if pet_type == 'gif':
+        widget = GifWidget(data)
+    else:
+        widget = GifWidget(data)
+    widget.show()
+    sys.exit(app.exec_())
